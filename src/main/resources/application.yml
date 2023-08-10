@@ -1,0 +1,8 @@
+spring:
+  elasticsearch:
+    uris: http://localhost:9200
+
+server:
+  port: 16969
+  servlet:
+    context-path: /elastic
