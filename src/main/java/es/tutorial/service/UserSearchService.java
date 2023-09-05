@@ -20,6 +20,7 @@ public class UserSearchService {
     private UserSearchRepository userSearchRepository;
 
     public List<User> getUsers(){
+        log.info("------------------------------Start------------------------------");
         log.info("getUsers start");
         List<User> users = null;
         try {
@@ -28,11 +29,12 @@ public class UserSearchService {
         catch (Exception e) {
             log.error(String.format("getUsers error: %s", e.getMessage()));
         }
-
+        log.info("------------------------------End------------------------------");
         return users;
     }
 
     public User getUserByName(String name, PageRequest pageRequest){
+        log.info("------------------------------Start------------------------------");
         log.info("getUserByName start: name: {}",name);
         User user = null;
 
@@ -40,20 +42,17 @@ public class UserSearchService {
             user = userSearchRepository.findByName(name, pageRequest);
         }
         catch (Exception e){
-            log.error("getUsers error: %s", e.getMessage());
+            log.error("getUsers error: {}", e.getMessage());
         }
 
-
+        log.info("------------------------------End------------------------------");
         return user;
     }
 
     public String addUser(User user){
         String result = null;
+        log.info("------------------------------Start------------------------------");
         log.info("addUser start:{}",user.toString());
-
-        List<User> users = this.getUsers();
-
-        user.setId(users.get(users.size()-1).getId() + 1L);
 
         try {
             userSearchRepository.save(user);
@@ -62,10 +61,12 @@ public class UserSearchService {
             result = e.getCause().toString();
             log.error("addUser error:{}", e.getMessage());
         }
+        log.info("------------------------------End------------------------------");
         return result;
     }
 
     public void updateUser(User user){
+        log.info("------------------------------Start------------------------------");
         log.info("updateUser start:{}",user.toString());
         try {
             userSearchRepository.save(user);
@@ -73,6 +74,7 @@ public class UserSearchService {
         catch (Exception e) {
             log.error("updateUser error:{}", e.getMessage());
         }
+        log.info("------------------------------End------------------------------");
     }
 
 }

@@ -6,6 +6,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.annotations.WriteTypeHint;
+
 /**
  * @author star.lee
  */
@@ -13,12 +15,12 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(indexName ="user")
+@Document(indexName ="user", writeTypeHint = WriteTypeHint.FALSE)
 public class User {
 
     @Schema(hidden = true)
     @Id
-    private long id;
+    private String id;
 
     @Field(store = true, type = FieldType.Text)
     private String name;
